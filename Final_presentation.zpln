@@ -1,0 +1,1100 @@
+﻿{
+  "paragraphs": [
+    {
+      "user": "anonymous",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1602605108979_307464083",
+      "id": "paragraph_1602605108979_307464083",
+      "dateCreated": "2020-10-13T13:05:08-0300",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:536",
+      "text": "import org.apache.spark.sql.types._      // include the Spark Types to define our schema\nimport org.apache.spark.sql.functions._  // include the Spark helper functions\nimport spark.implicits._                 // For implicit conversions like converting RDDs to DataFrames\nimport org.apache.spark.sql.expressions._",
+      "dateUpdated": "2020-10-13T13:05:57-0300",
+      "dateFinished": "2020-10-13T13:06:00-0300",
+      "dateStarted": "2020-10-13T13:05:57-0300",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "import org.apache.spark.sql.types._\nimport org.apache.spark.sql.functions._\nimport spark.implicits._\nimport org.apache.spark.sql.expressions._\n"
+          }
+        ]
+      }
+    },
+    {
+      "user": "anonymous",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1602605157901_968114764",
+      "id": "paragraph_1602605157901_968114764",
+      "dateCreated": "2020-10-13T13:05:57-0300",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:664",
+      "text": "val location_schema =\n    MapType(StringType,\n        new StructType()\n            .add(\"accuracy\", DoubleType)\n            .add(\"address\", StringType)\n            .add(\"altitude\", DoubleType)\n            .add(\"country\", StringType)\n            .add(\"latitude\", DoubleType)\n            .add(\"longitude\", DoubleType)\n            .add(\"provider\", StringType)\n            .add(\"timestamp\", \n             new StructType()\n                .add(\"date\", LongType)\n                .add(\"day\", LongType)\n                .add(\"hours\", LongType)\n                .add(\"minutes\", LongType)\n                .add(\"month\", LongType)\n                .add(\"nanos\", LongType)\n                .add(\"seconds\", LongType)\n                .add(\"time\", LongType)\n                .add(\"timezoneOffset\", LongType)\n                .add(\"year\", LongType)\n            )\n            .add(\"uid\", StringType)\n        )\n\nval schema = new StructType()\n    .add(\"locations\", location_schema)\n    .add(\"user-locations\",\n        MapType(StringType, location_schema)\n    )\n    .add(\"users\",\n        MapType(StringType,\n            new StructType()\n                .add(\"email\", StringType)\n                .add(\"username\", StringType)\n        )\n    )",
+      "dateUpdated": "2020-10-13T13:06:12-0300",
+      "dateFinished": "2020-10-13T13:06:15-0300",
+      "dateStarted": "2020-10-13T13:06:12-0300",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mlocation_schema\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.types.MapType\u001b[0m = MapType(StringType,StructType(StructField(accuracy,DoubleType,true), StructField(address,StringType,true), StructField(altitude,DoubleType,true), StructField(country,StringType,true), StructField(latitude,DoubleType,true), StructField(longitude,DoubleType,true), StructField(provider,StringType,true), StructField(timestamp,StructType(StructField(date,LongType,true), StructField(day,LongType,true), StructField(hours,LongType,true), StructField(minutes,LongType,true), StructField(month,LongType,true), StructField(nanos,LongType,true), StructField(seconds,LongType,true), StructField(time,LongType,true), StructField(timezoneOffset,LongType,true), StructField(year,LongType,true)),true), StructField(uid,StringType,..."
+          }
+        ]
+      }
+    },
+    {
+      "user": "anonymous",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1602605172915_80269518",
+      "id": "paragraph_1602605172915_80269518",
+      "dateCreated": "2020-10-13T13:06:12-0300",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:764",
+      "text": "\nval df = spark.read.option(\"multiline\", true).schema(schema).json(\"/home/vinicius/Downloads/dadosFinal.json\")",
+      "dateUpdated": "2020-10-13T13:19:13-0300",
+      "dateFinished": "2020-10-13T13:19:13-0300",
+      "dateStarted": "2020-10-13T13:19:13-0300",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mdf\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [locations: map<string,struct<accuracy:double,address:string,altitude:double,country:string,latitude:double,longitude:double,provider:string,timestamp:struct<date:bigint,day:bigint,hours:bigint,minutes:bigint,month:bigint,nanos:bigint,seconds:bigint,time:bigint,timezoneOffset:bigint,year:bigint>,uid:string>>, user-locations: map<string,map<string,struct<accuracy:double,address:string,altitude:double,country:string,latitude:double,longitude:double,provider:string,timestamp:struct<date:bigint,day:bigint,hours:bigint,minutes:bigint,month:bigint,nanos:bigint,seconds:bigint,time:bigint,timezoneOffset:bigint,year:bigint>,uid:string>>> ... 1 more field]\n"
+          }
+        ]
+      }
+    },
+    {
+      "user": "anonymous",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1602605186625_650957777",
+      "id": "paragraph_1602605186625_650957777",
+      "dateCreated": "2020-10-13T13:06:26-0300",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:855",
+      "text": "df.printSchema()",
+      "dateUpdated": "2020-10-13T13:19:15-0300",
+      "dateFinished": "2020-10-13T13:19:15-0300",
+      "dateStarted": "2020-10-13T13:19:15-0300",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "root\n |-- locations: map (nullable = true)\n |    |-- key: string\n |    |-- value: struct (valueContainsNull = true)\n |    |    |-- accuracy: double (nullable = true)\n |    |    |-- address: string (nullable = true)\n |    |    |-- altitude: double (nullable = true)\n |    |    |-- country: string (nullable = true)\n |    |    |-- latitude: double (nullable = true)\n |    |    |-- longitude: double (nullable = true)\n |    |    |-- provider: string (nullable = true)\n |    |    |-- timestamp: struct (nullable = true)\n |    |    |    |-- date: long (nullable = true)\n |    |    |    |-- day: long (nullable = true)\n |    |    |    |-- hours: long (nullable = true)\n |    |    |    |-- minutes: long (nullable = true)\n |    |    |    |-- month: long (nullable = true)\n |    |    |    |-- nanos: long (nullable = true)\n |    |    |    |-- seconds: long (nullable = true)\n |    |    |    |-- time: long (nullable = true)\n |    |    |    |-- timezoneOffset: long (nullable = true)\n |    |    |    |-- year: long (nullable = true)\n |    |    |-- uid: string (nullable = true)\n |-- user-locations: map (nullable = true)\n |    |-- key: string\n |    |-- value: map (valueContainsNull = true)\n |    |    |-- key: string\n |    |    |-- value: struct (valueContainsNull = true)\n |    |    |    |-- accuracy: double (nullable = true)\n |    |    |    |-- address: string (nullable = true)\n |    |    |    |-- altitude: double (nullable = true)\n |    |    |    |-- country: string (nullable = true)\n |    |    |    |-- latitude: double (nullable = true)\n |    |    |    |-- longitude: double (nullable = true)\n |    |    |    |-- provider: string (nullable = true)\n |    |    |    |-- timestamp: struct (nullable = true)\n |    |    |    |    |-- date: long (nullable = true)\n |    |    |    |    |-- day: long (nullable = true)\n |    |    |    |    |-- hours: long (nullable = true)\n |    |    |    |    |-- minutes: long (nullable = true)\n |    |    |    |    |-- month: long (nullable = true)\n |    |    |    |    |-- nanos: long (nullable = true)\n |    |    |    |    |-- seconds: long (nullable = true)\n |    |    |    |    |-- time: long (nullable = true)\n |    |    |    |    |-- timezoneOffset: long (nullable = true)\n |    |    |    |    |-- year: long (nullable = true)\n |    |    |    |-- uid: string (nullable = true)\n |-- users: map (nullable = true)\n |    |-- key: string\n |    |-- value: struct (valueContainsNull = true)\n |    |    |-- email: string (nullable = true)\n |    |    |-- username: string (nullable = true)\n\n"
+          }
+        ]
+      }
+    },
+    {
+      "user": "anonymous",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1602605212872_793209952",
+      "id": "paragraph_1602605212872_793209952",
+      "dateCreated": "2020-10-13T13:06:52-0300",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:924",
+      "text": "\nval rawLocationsDF = df.select(explode($\"locations\") as Seq(\"timestamp_id\", \"value\"))\nval rawUserLocationsDF = df.select(explode($\"user-locations\") as Seq(\"uid\", \"timestamp\"))\nval rawUsersDF = df.select(explode($\"users\") as Seq(\"uid\", \"user_attr\"))",
+      "dateUpdated": "2020-10-13T13:19:20-0300",
+      "dateFinished": "2020-10-13T13:19:20-0300",
+      "dateStarted": "2020-10-13T13:19:20-0300",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mrawLocationsDF\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [timestamp_id: string, value: struct<accuracy: double, address: string ... 7 more fields>]\n\u001b[1m\u001b[34mrawUserLocationsDF\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [uid: string, timestamp: map<string,struct<accuracy:double,address:string,altitude:double,country:string,latitude:double,longitude:double,provider:string,timestamp:struct<date:bigint,day:bigint,hours:bigint,minutes:bigint,month:bigint,nanos:bigint,seconds:bigint,time:bigint,timezoneOffset:bigint,year:bigint>,uid:string>>]\n\u001b[1m\u001b[34mrawUsersDF\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [uid: string, user_attr: struct<email: string, username: string>]\n"
+          }
+        ]
+      }
+    },
+    {
+      "user": "anonymous",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1602605272957_2145894027",
+      "id": "paragraph_1602605272957_2145894027",
+      "dateCreated": "2020-10-13T13:07:52-0300",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:1066",
+      "text": "rawUsersDF.printSchema()",
+      "dateUpdated": "2020-10-13T13:19:22-0300",
+      "dateFinished": "2020-10-13T13:19:23-0300",
+      "dateStarted": "2020-10-13T13:19:22-0300",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "root\n |-- uid: string (nullable = false)\n |-- user_attr: struct (nullable = true)\n |    |-- email: string (nullable = true)\n |    |-- username: string (nullable = true)\n\n"
+          }
+        ]
+      }
+    },
+    {
+      "user": "anonymous",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1602605286992_507476828",
+      "id": "paragraph_1602605286992_507476828",
+      "dateCreated": "2020-10-13T13:08:06-0300",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:1161",
+      "text": "import org.apache.spark.sql.Column\n\ndef flattenSchema(schema: StructType, prefix: String = null) : Array[Column] = {\n  schema.fields.flatMap(f => {\n    val colName = if (prefix == null) f.name else (prefix + \".\" + f.name)\n\n    f.dataType match {\n      case st: StructType => flattenSchema(st, colName)\n      case _ => Array(col(colName))\n    }\n  })\n}",
+      "dateUpdated": "2020-10-13T13:19:25-0300",
+      "dateFinished": "2020-10-13T13:19:26-0300",
+      "dateStarted": "2020-10-13T13:19:25-0300",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "import org.apache.spark.sql.Column\n\u001b[1m\u001b[34mflattenSchema\u001b[0m: \u001b[1m\u001b[32m(schema: org.apache.spark.sql.types.StructType, prefix: String)Array[org.apache.spark.sql.Column]\u001b[0m\n"
+          }
+        ]
+      }
+    },
+    {
+      "user": "anonymous",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1602605303977_497234464",
+      "id": "paragraph_1602605303977_497234464",
+      "dateCreated": "2020-10-13T13:08:23-0300",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:1273",
+      "text": "\nval locationsDF = rawLocationsDF.select(flattenSchema(rawLocationsDF.schema):_*)\nval userLocationsDF = rawUserLocationsDF.select(flattenSchema(rawUserLocationsDF.schema):_*)\nval usersDF = rawUsersDF.select(flattenSchema(rawUsersDF.schema):_*)",
+      "dateUpdated": "2020-10-13T13:19:28-0300",
+      "dateFinished": "2020-10-13T13:19:29-0300",
+      "dateStarted": "2020-10-13T13:19:28-0300",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mlocationsDF\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [timestamp_id: string, accuracy: double ... 17 more fields]\n\u001b[1m\u001b[34muserLocationsDF\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [uid: string, timestamp: map<string,struct<accuracy:double,address:string,altitude:double,country:string,latitude:double,longitude:double,provider:string,timestamp:struct<date:bigint,day:bigint,hours:bigint,minutes:bigint,month:bigint,nanos:bigint,seconds:bigint,time:bigint,timezoneOffset:bigint,year:bigint>,uid:string>>]\n\u001b[1m\u001b[34musersDF\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [uid: string, email: string ... 1 more field]\n"
+          }
+        ]
+      }
+    },
+    {
+      "user": "anonymous",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1602605895195_225717498",
+      "id": "paragraph_1602605895195_225717498",
+      "dateCreated": "2020-10-13T13:18:15-0300",
+      "status": "READY",
+      "focus": true,
+      "$$hashKey": "object:3635"
+    },
+    {
+      "user": "anonymous",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1602605314656_308694110",
+      "id": "paragraph_1602605314656_308694110",
+      "dateCreated": "2020-10-13T13:08:34-0300",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:1371",
+      "text": "\nlocationsDF.printSchema()",
+      "dateUpdated": "2020-10-13T13:19:32-0300",
+      "dateFinished": "2020-10-13T13:19:32-0300",
+      "dateStarted": "2020-10-13T13:19:32-0300",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "root\n |-- timestamp_id: string (nullable = false)\n |-- accuracy: double (nullable = true)\n |-- address: string (nullable = true)\n |-- altitude: double (nullable = true)\n |-- country: string (nullable = true)\n |-- latitude: double (nullable = true)\n |-- longitude: double (nullable = true)\n |-- provider: string (nullable = true)\n |-- date: long (nullable = true)\n |-- day: long (nullable = true)\n |-- hours: long (nullable = true)\n |-- minutes: long (nullable = true)\n |-- month: long (nullable = true)\n |-- nanos: long (nullable = true)\n |-- seconds: long (nullable = true)\n |-- time: long (nullable = true)\n |-- timezoneOffset: long (nullable = true)\n |-- year: long (nullable = true)\n |-- uid: string (nullable = true)\n\n"
+          }
+        ]
+      }
+    },
+    {
+      "user": "anonymous",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://192.168.0.11:4040/jobs/job?id=29",
+              "$$hashKey": "object:4078"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1602605323713_647611950",
+      "id": "paragraph_1602605323713_647611950",
+      "dateCreated": "2020-10-13T13:08:43-0300",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:1477",
+      "text": "usersDF.take(2).foreach(println)",
+      "dateUpdated": "2020-10-13T13:19:37-0300",
+      "dateFinished": "2020-10-13T13:19:37-0300",
+      "dateStarted": "2020-10-13T13:19:37-0300",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "[5Jf44SGWhzZmxsZs7n6KLzrHark1,rodrigomesquita0@gmail.com,rodrigomesquita0]\n[H5LG3vN3jcPlcbJ2A5RGo6H4AHw2,henrique.mageste@gmail.com,henrique.mageste]\n"
+          }
+        ]
+      }
+    },
+    {
+      "user": "anonymous",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1602605334000_2082637825",
+      "id": "paragraph_1602605334000_2082637825",
+      "dateCreated": "2020-10-13T13:08:54-0300",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:1578",
+      "text": "val locationsWithDateDF = locationsDF.withColumn(\"ts_date\", (col(\"timestamp_id\")/1000).cast(TimestampType))",
+      "dateUpdated": "2020-10-13T13:19:40-0300",
+      "dateFinished": "2020-10-13T13:19:40-0300",
+      "dateStarted": "2020-10-13T13:19:40-0300",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mlocationsWithDateDF\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [timestamp_id: string, accuracy: double ... 18 more fields]\n"
+          }
+        ]
+      }
+    },
+    {
+      "user": "anonymous",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1602605356282_765757892",
+      "id": "paragraph_1602605356282_765757892",
+      "dateCreated": "2020-10-13T13:09:16-0300",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:1677",
+      "text": "val joinExpression = locationsWithDateDF.col(\"uid\") === usersDF.col(\"uid\")\nvar joinType = \"inner\"\nval locWithDateJoinUserDF = locationsWithDateDF.join(usersDF, joinExpression, joinType).drop(usersDF.col(\"uid\")).orderBy($\"timestamp_id\")",
+      "dateUpdated": "2020-10-13T13:19:45-0300",
+      "dateFinished": "2020-10-13T13:19:45-0300",
+      "dateStarted": "2020-10-13T13:19:45-0300",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mjoinExpression\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.Column\u001b[0m = (uid = uid)\n\u001b[1m\u001b[34mjoinType\u001b[0m: \u001b[1m\u001b[32mString\u001b[0m = inner\n\u001b[1m\u001b[34mlocWithDateJoinUserDF\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.Dataset[org.apache.spark.sql.Row]\u001b[0m = [timestamp_id: string, accuracy: double ... 20 more fields]\n"
+          }
+        ]
+      }
+    },
+    {
+      "user": "anonymous",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://192.168.0.11:4040/jobs/job?id=30",
+              "$$hashKey": "object:4214"
+            },
+            {
+              "jobUrl": "http://192.168.0.11:4040/jobs/job?id=31",
+              "$$hashKey": "object:4215"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1602605368366_2073514575",
+      "id": "paragraph_1602605368366_2073514575",
+      "dateCreated": "2020-10-13T13:09:28-0300",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:1778",
+      "text": "locWithDateJoinUserDF.select(\"email\", \"latitude\", \"longitude\", \"ts_date\").show()",
+      "dateUpdated": "2020-10-13T13:19:47-0300",
+      "dateFinished": "2020-10-13T13:19:47-0300",
+      "dateStarted": "2020-10-13T13:19:47-0300",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+--------------------+-----------+-----------+--------------------+\n|               email|   latitude|  longitude|             ts_date|\n+--------------------+-----------+-----------+--------------------+\n|henrique.mageste@...|-22.9556468|-43.1880249|2020-10-07 22:16:...|\n|henrique.mageste@...|-22.9556367|-43.1880211|2020-10-07 22:18:...|\n|henrique.mageste@...|-22.9556134|-43.1879997|2020-10-07 22:34:...|\n|henrique.mageste@...|-22.9556477|-43.1880597|2020-10-07 22:40:...|\n|wallace.mendes.rj...|-22.8381181|-43.2623295|2020-10-07 22:41:...|\n|wallace.mendes.rj...|-22.8381179|-43.2623138|2020-10-07 22:43:...|\n|wallace.mendes.rj...| -22.838109|-43.2623071|2020-10-07 22:45:...|\n|wallace.mendes.rj...|-22.8381141|-43.2623158|2020-10-07 22:47:...|\n|henrique.mageste@...|-22.9556593|-43.1880598|2020-10-07 22:48:...|\n|wallace.mendes.rj...| -22.837858|-43.2621474| 2020-10-07 22:49:11|\n|henrique.mageste@...|-22.9556522|-43.1880422|2020-10-07 22:49:...|\n|henrique.mageste@...|-22.9556413|-43.1880571|2020-10-07 22:50:...|\n|wallace.mendes.rj...|-22.8339884| -43.259253|2020-10-07 22:50:...|\n|henrique.mageste@...|-22.9556438|-43.1880622|2020-10-07 22:51:...|\n|wallace.mendes.rj...|-22.8380786|-43.2621135|2020-10-07 22:52:...|\n|henrique.mageste@...|-22.9555958|-43.1880177|2020-10-07 22:52:...|\n|wallace.mendes.rj...|-22.8381159|-43.2623215|2020-10-07 22:53:...|\n|henrique.mageste@...|-22.9555982|-43.1880122|2020-10-07 22:54:...|\n|wallace.mendes.rj...|-22.8381159|-43.2623215|2020-10-07 22:54:...|\n|wallace.mendes.rj...|-22.8381448|-43.2623323|2020-10-07 22:54:...|\n+--------------------+-----------+-----------+--------------------+\nonly showing top 20 rows\n\n"
+          }
+        ]
+      }
+    },
+    {
+      "user": "anonymous",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1602605379204_1870392612",
+      "id": "paragraph_1602605379204_1870392612",
+      "dateCreated": "2020-10-13T13:09:39-0300",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:1880",
+      "text": "import scala.math.Pi\nimport org.apache.spark.sql.functions._\n\ndef calculate_distance_col(lat1:org.apache.spark.sql.Column, lon1:org.apache.spark.sql.Column, lat2:org.apache.spark.sql.Column, lon2:org.apache.spark.sql.Column):org.apache.spark.sql.Column = {   \n    val earth_radius = 6371e3;           // meters\n    val pi_over_180 = lit(Pi/180);\n    val phi1 = lat1 * pi_over_180;                  // radians\n    val phi2 = lat2 * pi_over_180;                  // radians\n    val delta_phi = phi2 - phi1;               // radians\n\n    val delta_lampda = (lon2 - lon1) * pi_over_180; // radians\n\n    val a = sin(delta_phi/2)*sin(delta_phi/2) + cos(phi1)*cos(phi2)*sin(delta_lampda/2)*sin(delta_lampda/2);\n    val c = lit(2)*atan2(sqrt(a), sqrt(lit(1)-a));\n\n    val d = lit(earth_radius)*c; // meters\n    \n    return d;\n}",
+      "dateUpdated": "2020-10-13T13:19:53-0300",
+      "dateFinished": "2020-10-13T13:19:53-0300",
+      "dateStarted": "2020-10-13T13:19:53-0300",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "import scala.math.Pi\nimport org.apache.spark.sql.functions._\n\u001b[1m\u001b[34mcalculate_distance_col\u001b[0m: \u001b[1m\u001b[32m(lat1: org.apache.spark.sql.Column, lon1: org.apache.spark.sql.Column, lat2: org.apache.spark.sql.Column, lon2: org.apache.spark.sql.Column)org.apache.spark.sql.Column\u001b[0m\n"
+          }
+        ]
+      }
+    },
+    {
+      "user": "anonymous",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1602605393120_1703560504",
+      "id": "paragraph_1602605393120_1703560504",
+      "dateCreated": "2020-10-13T13:09:53-0300",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:1997",
+      "text": "import org.apache.spark.sql.expressions.Window",
+      "dateUpdated": "2020-10-13T13:19:55-0300",
+      "dateFinished": "2020-10-13T13:19:56-0300",
+      "dateStarted": "2020-10-13T13:19:55-0300",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "import org.apache.spark.sql.expressions.Window\n"
+          }
+        ]
+      }
+    },
+    {
+      "user": "anonymous",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1602605404124_1508964314",
+      "id": "paragraph_1602605404124_1508964314",
+      "dateCreated": "2020-10-13T13:10:04-0300",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:2097",
+      "text": "// val lat_col = Window.partitionBy(\"latitude\").orderBy($\"timestamp_id\".asc)\n// val lon_col = Window.partitionBy(\"longitude\").orderBy($\"timestamp_id\".asc)\nval lat_col = Window.orderBy($\"timestamp_id\".asc)\nval lon_col = Window.orderBy($\"timestamp_id\".asc)\n\nval lat2 = col(\"latitude\")\nval lat1 = lag(\"latitude\", 1).over(lat_col)\n// val lat1 = when((lag(\"latitude\", 1).over(lat_col)).isNotNull, lag(\"latitude\", 1).over(lat_col)).otherwise(0)\n\nval lon2 = col(\"longitude\")\nval lon1 = lag(\"longitude\", 1).over(lat_col)\n// val lon1 = when((lag(\"longitude\", 1).over(lon_col)).isNotNull, lag(\"longitude\", 1).over(lon_col)).otherwise(0)",
+      "dateUpdated": "2020-10-13T13:19:57-0300",
+      "dateFinished": "2020-10-13T13:19:57-0300",
+      "dateStarted": "2020-10-13T13:19:57-0300",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mlat_col\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.expressions.WindowSpec\u001b[0m = org.apache.spark.sql.expressions.WindowSpec@1ee2c8d4\n\u001b[1m\u001b[34mlon_col\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.expressions.WindowSpec\u001b[0m = org.apache.spark.sql.expressions.WindowSpec@622ee674\n\u001b[1m\u001b[34mlat2\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.Column\u001b[0m = latitude\n\u001b[1m\u001b[34mlat1\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.Column\u001b[0m = lag(latitude, 1, NULL) OVER (ORDER BY timestamp_id ASC NULLS FIRST unspecifiedframe$())\n\u001b[1m\u001b[34mlon2\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.Column\u001b[0m = longitude\n\u001b[1m\u001b[34mlon1\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.Column\u001b[0m = lag(longitude, 1, NULL) OVER (ORDER BY timestamp_id ASC NULLS FIRST unspecifiedframe$())\n"
+          }
+        ]
+      }
+    },
+    {
+      "user": "anonymous",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1602605415958_202417974",
+      "id": "paragraph_1602605415958_202417974",
+      "dateCreated": "2020-10-13T13:10:15-0300",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:2203",
+      "text": "val emails = \"viniciusmgaspar@gmail.com\"\n\nval joinExpression = locationsWithDateDF.col(\"uid\") === usersDF.col(\"uid\")\nvar joinType = \"inner\"\nval locationsWithDatePerUserDF = locationsWithDateDF.join(usersDF, joinExpression, joinType).drop(usersDF.col(\"uid\")).filter($\"Email\" === emails).orderBy($\"timestamp_id\")\n\nval locDatePerUserDistDF = locationsWithDatePerUserDF.withColumn(\"distance\", when(calculate_distance_col(lat1, lon1, lat2, lon2).isNotNull,calculate_distance_col(lat1, lon1, lat2, lon2)).otherwise(0.0))",
+      "dateUpdated": "2020-10-13T13:19:59-0300",
+      "dateFinished": "2020-10-13T13:20:00-0300",
+      "dateStarted": "2020-10-13T13:19:59-0300",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34memails\u001b[0m: \u001b[1m\u001b[32mString\u001b[0m = viniciusmgaspar@gmail.com\n\u001b[1m\u001b[34mjoinExpression\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.Column\u001b[0m = (uid = uid)\n\u001b[1m\u001b[34mjoinType\u001b[0m: \u001b[1m\u001b[32mString\u001b[0m = inner\n\u001b[1m\u001b[34mlocationsWithDatePerUserDF\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.Dataset[org.apache.spark.sql.Row]\u001b[0m = [timestamp_id: string, accuracy: double ... 20 more fields]\n\u001b[1m\u001b[34mlocDatePerUserDistDF\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [timestamp_id: string, accuracy: double ... 21 more fields]\n"
+          }
+        ]
+      }
+    },
+    {
+      "user": "anonymous",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://192.168.0.11:4040/jobs/job?id=32",
+              "$$hashKey": "object:4463"
+            },
+            {
+              "jobUrl": "http://192.168.0.11:4040/jobs/job?id=33",
+              "$$hashKey": "object:4464"
+            },
+            {
+              "jobUrl": "http://192.168.0.11:4040/jobs/job?id=34",
+              "$$hashKey": "object:4465"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1602605426808_799409170",
+      "id": "paragraph_1602605426808_799409170",
+      "dateCreated": "2020-10-13T13:10:26-0300",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:2312",
+      "text": "locDatePerUserDistDF.orderBy($\"ts_date\".asc)\n.select(\"username\",\"ts_date\",\"latitude\",\"longitude\",\"distance\")\n    .show(false)",
+      "dateUpdated": "2020-10-13T13:20:02-0300",
+      "dateFinished": "2020-10-13T13:20:04-0300",
+      "dateStarted": "2020-10-13T13:20:02-0300",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+---------------+-----------------------+-----------+-----------+------------------+\n|username       |ts_date                |latitude   |longitude  |distance          |\n+---------------+-----------------------+-----------+-----------+------------------+\n|viniciusmgaspar|2020-10-07 23:32:51.945|-22.9143424|-43.2479267|0.0               |\n|viniciusmgaspar|2020-10-07 23:34:51.961|-22.9143476|-43.2479225|0.720675492840136 |\n|viniciusmgaspar|2020-10-07 23:36:56.689|-22.9143736|-43.2479302|2.9967018357873862|\n|viniciusmgaspar|2020-10-07 23:37:57.042|-22.9143736|-43.2479302|0.0               |\n|viniciusmgaspar|2020-10-07 23:38:57.116|-22.9143736|-43.2479302|0.0               |\n|viniciusmgaspar|2020-10-07 23:40:02.011|-22.914351 |-43.247925 |2.5688213633650445|\n|viniciusmgaspar|2020-10-07 23:41:02.089|-22.914351 |-43.247925 |0.0               |\n|viniciusmgaspar|2020-10-07 23:42:09.072|-22.9143672|-43.2479284|1.8347079899956038|\n|viniciusmgaspar|2020-10-07 23:43:09.149|-22.9143672|-43.2479284|0.0               |\n|viniciusmgaspar|2020-10-07 23:44:10.298|-22.9143608|-43.2479235|0.8708071547226146|\n|viniciusmgaspar|2020-10-07 23:45:10.37 |-22.9143608|-43.2479235|0.0               |\n|viniciusmgaspar|2020-10-07 23:46:20.77 |-22.9143608|-43.2479235|0.0               |\n|viniciusmgaspar|2020-10-07 23:47:20.86 |-22.9143608|-43.2479235|0.0               |\n|viniciusmgaspar|2020-10-07 23:48:26.977|-22.9143612|-43.2479639|4.138018973396575 |\n|viniciusmgaspar|2020-10-07 23:49:33.323|-22.914376 |-43.2479024|6.510281292123442 |\n|viniciusmgaspar|2020-10-07 23:50:33.676|-22.914376 |-43.2479024|0.0               |\n|viniciusmgaspar|2020-10-07 23:51:33.654|-22.9143854|-43.2478801|2.5117802113336802|\n|viniciusmgaspar|2020-10-07 23:52:33.892|-22.9143854|-43.2478801|0.0               |\n|viniciusmgaspar|2020-10-07 23:53:33.964|-22.9143854|-43.2478801|0.0               |\n|viniciusmgaspar|2020-10-07 23:54:34.786|-22.9143797|-43.2478934|1.5024238063887392|\n+---------------+-----------------------+-----------+-----------+------------------+\nonly showing top 20 rows\n\n"
+          }
+        ]
+      }
+    },
+    {
+      "user": "anonymous",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://192.168.0.11:4040/jobs/job?id=35",
+              "$$hashKey": "object:4578"
+            },
+            {
+              "jobUrl": "http://192.168.0.11:4040/jobs/job?id=36",
+              "$$hashKey": "object:4579"
+            },
+            {
+              "jobUrl": "http://192.168.0.11:4040/jobs/job?id=37",
+              "$$hashKey": "object:4580"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1602605441213_628168229",
+      "id": "paragraph_1602605441213_628168229",
+      "dateCreated": "2020-10-13T13:10:41-0300",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:2412",
+      "text": "locDatePerUserDistDF.groupBy($\"email\",date_format(col(\"ts_date\"),\"dd-MM-yyyy\").as(\"date\")).sum(\"distance\").orderBy($\"email\".asc, $\"date\".asc)\n.show(false)",
+      "dateUpdated": "2020-10-13T13:20:08-0300",
+      "dateFinished": "2020-10-13T13:20:09-0300",
+      "dateStarted": "2020-10-13T13:20:08-0300",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+-------------------------+----------+------------------+\n|email                    |date      |sum(distance)     |\n+-------------------------+----------+------------------+\n|viniciusmgaspar@gmail.com|07-10-2020|27.519468577232455|\n|viniciusmgaspar@gmail.com|08-10-2020|11398.639235774424|\n+-------------------------+----------+------------------+\n\n"
+          }
+        ]
+      }
+    },
+    {
+      "user": "anonymous",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1602605838477_594362560",
+      "id": "paragraph_1602605838477_594362560",
+      "dateCreated": "2020-10-13T13:17:18-0300",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:2679",
+      "text": "val user1 = \"henrique.mageste@gmail.com\"\nval user2 = \"wallace.mendes.rj@gmail.com\"\n\nval user1_DF = locWithDateJoinUserDF.withColumn(\"formatted_date\", date_format($\"ts_date\",\"dd-MM-yyyy HH:mm\")).filter($\"email\" === user1).as(\"user1\")\nval user2_DF = locWithDateJoinUserDF.withColumn(\"formatted_date\", date_format($\"ts_date\",\"dd-MM-yyyy HH:mm\")).filter($\"email\" === user2).as(\"user2\")\n\nval joinExpression = ( user1_DF.col(\"formatted_date\") === user2_DF.col(\"formatted_date\"))\nval joinType = \"inner\"\nval c = user1_DF.join(user2_DF, joinExpression, joinType)\n    \nval c2= c.select(\n    col(\"user1.formatted_date\")\n    ,col(\"user2.formatted_date\")\n    ,col(\"user1.email\")\n    ,col(\"user2.email\")\n    ,col(\"user1.longitude\")\n    ,col(\"user2.longitude\")\n    ,col(\"user1.latitude\")\n    ,col(\"user2.latitude\")\n    ,col(\"user1.address\")\n    ,col(\"user2.address\")\n    )\n    .withColumn(\"distance_between\", calculate_distance_col(col(\"user1.latitude\"), col(\"user1.longitude\"), col(\"user2.latitude\"), col(\"user2.longitude\")) )",
+      "dateUpdated": "2020-10-13T13:21:36-0300",
+      "dateFinished": "2020-10-13T13:21:21-0300",
+      "dateStarted": "2020-10-13T13:21:20-0300",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34muser1\u001b[0m: \u001b[1m\u001b[32mString\u001b[0m = henrique.mageste@gmail.com\n\u001b[1m\u001b[34muser2\u001b[0m: \u001b[1m\u001b[32mString\u001b[0m = wallace.mendes.rj@gmail.com\n\u001b[1m\u001b[34muser1_DF\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.Dataset[org.apache.spark.sql.Row]\u001b[0m = [timestamp_id: string, accuracy: double ... 21 more fields]\n\u001b[1m\u001b[34muser2_DF\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.Dataset[org.apache.spark.sql.Row]\u001b[0m = [timestamp_id: string, accuracy: double ... 21 more fields]\n\u001b[1m\u001b[34mjoinExpression\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.Column\u001b[0m = (formatted_date = formatted_date)\n\u001b[1m\u001b[34mjoinType\u001b[0m: \u001b[1m\u001b[32mString\u001b[0m = inner\n\u001b[1m\u001b[34mc\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [timestamp_id: string, accuracy: double ... 44 more fields]\n\u001b[1m\u001b[34mc2\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [formatted..."
+          }
+        ]
+      }
+    },
+    {
+      "user": "anonymous",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://192.168.0.11:4040/jobs/job?id=52",
+              "$$hashKey": "object:6268"
+            },
+            {
+              "jobUrl": "http://192.168.0.11:4040/jobs/job?id=53",
+              "$$hashKey": "object:6269"
+            },
+            {
+              "jobUrl": "http://192.168.0.11:4040/jobs/job?id=54",
+              "$$hashKey": "object:6270"
+            },
+            {
+              "jobUrl": "http://192.168.0.11:4040/jobs/job?id=55",
+              "$$hashKey": "object:6271"
+            },
+            {
+              "jobUrl": "http://192.168.0.11:4040/jobs/job?id=56",
+              "$$hashKey": "object:6272"
+            },
+            {
+              "jobUrl": "http://192.168.0.11:4040/jobs/job?id=57",
+              "$$hashKey": "object:6273"
+            },
+            {
+              "jobUrl": "http://192.168.0.11:4040/jobs/job?id=58",
+              "$$hashKey": "object:6274"
+            },
+            {
+              "jobUrl": "http://192.168.0.11:4040/jobs/job?id=59",
+              "$$hashKey": "object:6275"
+            },
+            {
+              "jobUrl": "http://192.168.0.11:4040/jobs/job?id=60",
+              "$$hashKey": "object:6276"
+            },
+            {
+              "jobUrl": "http://192.168.0.11:4040/jobs/job?id=61",
+              "$$hashKey": "object:6277"
+            },
+            {
+              "jobUrl": "http://192.168.0.11:4040/jobs/job?id=62",
+              "$$hashKey": "object:6278"
+            },
+            {
+              "jobUrl": "http://192.168.0.11:4040/jobs/job?id=63",
+              "$$hashKey": "object:6279"
+            },
+            {
+              "jobUrl": "http://192.168.0.11:4040/jobs/job?id=64",
+              "$$hashKey": "object:6280"
+            },
+            {
+              "jobUrl": "http://192.168.0.11:4040/jobs/job?id=65",
+              "$$hashKey": "object:6281"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1602605853731_153437391",
+      "id": "paragraph_1602605853731_153437391",
+      "dateCreated": "2020-10-13T13:17:33-0300",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:2833",
+      "text": "\n// AGREGADO POR DATA\nc2.groupBy(col(\"user1.formatted_date\"),col(\"user2.formatted_date\")).agg(min(\"distance_between\"),max(\"distance_between\")).orderBy($\"user1.formatted_date\").show(false)\n\n// AGREGADO POR USUÁRIO    \nc2.groupBy(col(\"user1.email\"),col(\"user2.email\")).agg(min(\"distance_between\"),max(\"distance_between\")).show(false)",
+      "dateUpdated": "2020-10-13T13:21:40-0300",
+      "dateFinished": "2020-10-13T13:21:45-0300",
+      "dateStarted": "2020-10-13T13:21:40-0300",
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+----------------+----------------+---------------------+---------------------+\n|formatted_date  |formatted_date  |min(distance_between)|max(distance_between)|\n+----------------+----------------+---------------------+---------------------+\n|07-10-2020 22:49|07-10-2020 22:49|15138.752694453176   |15138.752694453176   |\n|07-10-2020 22:50|07-10-2020 22:50|15367.886012191113   |15367.886012191113   |\n|07-10-2020 22:52|07-10-2020 22:52|15111.625491525283   |15111.625491525283   |\n|07-10-2020 22:54|07-10-2020 22:54|15117.047889628033   |15119.267698828335   |\n|07-10-2020 22:57|07-10-2020 22:57|15118.077374728518   |15118.077374728518   |\n|07-10-2020 22:59|07-10-2020 22:59|15118.90405992265    |15121.055502987601   |\n|07-10-2020 23:00|07-10-2020 23:00|15122.087961512667   |15122.087961512667   |\n|07-10-2020 23:02|07-10-2020 23:02|15122.191299320195   |15122.191299320195   |\n|07-10-2020 23:03|07-10-2020 23:03|15122.539946497187   |15122.539946497187   |\n|07-10-2020 23:04|07-10-2020 23:04|15122.702272879895   |15122.702272879895   |\n|07-10-2020 23:05|07-10-2020 23:05|15122.514270273936   |15122.514270273936   |\n|07-10-2020 23:18|07-10-2020 23:18|15122.676462968528   |15122.676462968528   |\n|07-10-2020 23:21|07-10-2020 23:21|15128.676115410955   |15128.676115410955   |\n|07-10-2020 23:24|07-10-2020 23:24|15122.710763217514   |15122.710763217514   |\n|08-10-2020 00:16|08-10-2020 00:16|15121.754385878157   |15213.285690905239   |\n|08-10-2020 00:18|08-10-2020 00:18|15121.878406938411   |15121.878406938411   |\n|08-10-2020 00:22|08-10-2020 00:22|15122.676179017539   |15122.676179017539   |\n|08-10-2020 00:23|08-10-2020 00:23|15117.668511047192   |15117.668511047192   |\n|08-10-2020 00:24|08-10-2020 00:24|15119.741341112529   |15119.741341112529   |\n|08-10-2020 00:26|08-10-2020 00:26|15120.380487749486   |15120.380487749486   |\n+----------------+----------------+---------------------+---------------------+\nonly showing top 20 rows\n\n+--------------------------+---------------------------+---------------------+---------------------+\n|email                     |email                      |min(distance_between)|max(distance_between)|\n+--------------------------+---------------------------+---------------------+---------------------+\n|henrique.mageste@gmail.com|wallace.mendes.rj@gmail.com|15003.316084810856   |15367.886012191113   |\n+--------------------------+---------------------------+---------------------+---------------------+\n\n"
+          }
+        ]
+      }
+    },
+    {
+      "user": "anonymous",
+      "config": {
+        "colWidth": 12,
+        "fontSize": 9,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1602605864994_586174808",
+      "id": "paragraph_1602605864994_586174808",
+      "dateCreated": "2020-10-13T13:17:44-0300",
+      "status": "READY",
+      "focus": true,
+      "$$hashKey": "object:2934"
+    }
+  ],
+  "name": "Final_presentation",
+  "id": "2FQ6BJ7C9",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.9.0-preview2",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false,
+    "looknfeel": "default",
+    "personalizedMode": "false"
+  },
+  "info": {},
+  "path": "/Final_presentation"
+}
